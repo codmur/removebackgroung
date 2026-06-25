@@ -45,14 +45,20 @@ export function ProjectDetailContent() {
 			const response = await fetch(fileUrl);
 			const blob = await response.blob();
 			const url = window.URL.createObjectURL(blob);
+			
 			const link = document.createElement("a");
 			link.href = url;
 			link.download = fileName;
+			link.target = "_blank"; // Helps bypass some strict popup blockers
 			link.style.display = "none";
 			document.body.appendChild(link);
 			link.click();
-			link.remove();
-			window.URL.revokeObjectURL(url);
+			
+			// Wait before cleanup so mobile browsers can process the download
+			setTimeout(() => {
+				link.remove();
+				window.URL.revokeObjectURL(url);
+			}, 2000);
 		} catch (error) {
 			console.error("Error downloading image:", error);
 			window.open(fileUrl, "_blank");
