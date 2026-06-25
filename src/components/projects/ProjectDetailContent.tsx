@@ -1,6 +1,6 @@
 import { getRouteApi, useRouter } from "@tanstack/react-router";
 import { Button, Spinner } from "@heroui/react";
-import { ChevronLeft, CircleCheck, Download, Wand2 } from "lucide-react";
+import { ChevronLeft, CircleCheck, Download, Wand2, Share2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
 	Comparison,
@@ -39,25 +39,11 @@ export function ProjectDetailContent() {
 	const download = async () => {
 		if (!imageWithoutBgUrl) return;
 		const fileUrl = imageWithoutBgUrl;
-		const fileName = `no-bg-${name}.png`; // Assuming PNG for background-removed images
+		const fileName = `no-bg-${name}.png`;
 
 		try {
 			const response = await fetch(fileUrl);
 			const blob = await response.blob();
-
-			// Fallback to Web Share API for mobile devices (iOS/Android)
-			if (navigator.share) {
-				const file = new File([blob], fileName, { type: blob.type });
-				if (navigator.canShare && navigator.canShare({ files: [file] })) {
-					await navigator.share({
-						files: [file],
-						title: fileName,
-					});
-					return;
-				}
-			}
-
-			// Desktop / fallback approach
 			const url = window.URL.createObjectURL(blob);
 			const link = document.createElement("a");
 			link.href = url;
@@ -69,8 +55,34 @@ export function ProjectDetailContent() {
 			window.URL.revokeObjectURL(url);
 		} catch (error) {
 			console.error("Error downloading image:", error);
-			// Ultimate fallback: open in new tab
 			window.open(fileUrl, "_blank");
+		}
+	};
+
+	const share = async () => {
+		if (!imageWithoutBgUrl) return;
+		const fileUrl = imageWithoutBgUrl;
+		const fileName = `no-bg-${name}.png`;
+
+		try {
+			const response = await fetch(fileUrl);
+			const blob = await response.blob();
+			
+			if (navigator.share) {
+				const file = new File([blob], fileName, { type: blob.type });
+				if (navigator.canShare && navigator.canShare({ files: [file] })) {
+					await navigator.share({
+						files: [file],
+						title: fileName,
+					});
+				} else {
+					alert("Your device does not support sharing this file type directly.");
+				}
+			} else {
+				alert("Web Share API is not supported in your browser.");
+			}
+		} catch (error) {
+			console.error("Error sharing image:", error);
 		}
 	};
 
@@ -161,14 +173,24 @@ export function ProjectDetailContent() {
 					)}
 
 					{imageWithoutBgUrl && (
-						<Button
-							size="lg"
-							className="w-full font-semibold shadow-md bg-accent text-accent-foreground flex items-center justify-center gap-2 hover:scale-105 transition-all duration-200"
-							onPress={download}
-						>
-							<Download size={18} />
-							Download Image
-						</Button>
+						<div className="flex gap-2 w-full">
+							<Button
+								size="lg"
+								className="flex-1 font-semibold shadow-md bg-accent text-accent-foreground flex items-center justify-center gap-2 hover:scale-105 transition-all duration-200 px-0"
+								onPress={download}
+							>
+								<Download size={18} />
+								Download
+							</Button>
+							<Button
+								size="lg"
+								className="flex-1 font-semibold shadow-md bg-secondary text-secondary-foreground flex items-center justify-center gap-2 hover:scale-105 transition-all duration-200 px-0"
+								onPress={share}
+							>
+								<Share2 size={18} />
+								Share
+							</Button>
+						</div>
 					)}
 				</div>
 			</div>

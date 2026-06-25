@@ -15,7 +15,7 @@ export function QuickUploadButton() {
           className="bg-accent text-accent-foreground font-bold shadow-xs flex items-center gap-1.5 hover:scale-105 transition-transform duration-200 cursor-pointer"
         >
           <UploadCloud size={16} />
-          <span className="hidden md:inline">{m.uploader_navButton()}</span>
+          <span>{m.uploader_navButton()}</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent placement="bottom" className="p-4 w-[320px] bg-card border border-border shadow-lg rounded-2xl">
