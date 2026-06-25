@@ -9,7 +9,7 @@ export const LoginOrSignUp = () => {
   const [activeTab, setActiveTab] = useState<string>("login");
 
   return (
-    <div className={cn("flex flex-col items-center gap-6 max-w-xl mx-auto p-12")}>
+    <div className={cn("flex flex-col items-center gap-4 max-w-md w-full mx-auto px-2 py-6 sm:p-4")}>
   
 
       <Segment

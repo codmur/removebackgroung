@@ -33,12 +33,7 @@ function RouteComponent() {
           <img
             src="/logo.webp"
             alt="BGR Logo"
-            className="block dark:hidden h-8 w-auto rounded-lg shadow-xs group-hover/header:rotate-3 transition-transform duration-200 shrink-0"
-          />
-          <img
-            src="/logo-black.jpg"
-            alt="BGR Logo"
-            className="hidden dark:block h-8 w-auto rounded-lg shadow-xs group-hover/header:rotate-3 transition-transform duration-200 shrink-0"
+            className="h-8 w-auto rounded-lg shadow-xs group-hover/header:rotate-3 transition-transform duration-200 shrink-0"
           />
           <span className="bg-gradient-to-r from-foreground to-accent bg-clip-text text-transparent font-extrabold text-base tracking-tight group-data-[state=collapsed]:hidden truncate">
             BgRemover
@@ -124,12 +119,7 @@ function RouteComponent() {
           <img
             src="/logo.webp"
             alt="BGR Logo"
-            className="block dark:hidden h-8 w-auto rounded-lg shadow-xs group-hover:rotate-3 transition-transform duration-200 shrink-0"
-          />
-          <img
-            src="/logo-black.jpg"
-            alt="BGR Logo"
-            className="hidden dark:block h-8 w-auto rounded-lg shadow-xs group-hover:rotate-3 transition-transform duration-200 shrink-0"
+            className="h-8 w-auto rounded-lg shadow-xs group-hover:rotate-3 transition-transform duration-200 shrink-0"
           />
           <span className="bg-gradient-to-r from-foreground to-accent bg-clip-text text-transparent font-extrabold text-base tracking-tight">
             BgRemover

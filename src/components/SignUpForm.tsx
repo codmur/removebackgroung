@@ -45,12 +45,12 @@ export function SignUpForm({ switchToLogIn }: SignUpFormProps) {
   };
 
   return (
-    <Card className="w-full">
-      <Card.Header>
-        <Card.Title>{m.auth_signUpTitle()}</Card.Title>
-        <Card.Description>{m.auth_signUpDescription()}</Card.Description>
+    <Card className="w-full shadow-xl border-none bg-background/80 backdrop-blur-xl">
+      <Card.Header className="pt-6 pb-2 sm:pt-8 sm:pb-4 text-center">
+        <Card.Title className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-accent bg-clip-text text-transparent">{m.auth_signUpTitle()}</Card.Title>
+        <Card.Description className="text-sm text-muted-foreground">{m.auth_signUpDescription()}</Card.Description>
       </Card.Header>
-      <Card.Content>
+      <Card.Content className="px-4 pb-6 sm:px-6 sm:pb-6">
         <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           {errorMsg && (
             <Alert status="danger">
@@ -73,7 +73,7 @@ export function SignUpForm({ switchToLogIn }: SignUpFormProps) {
             <FieldError />
           </TextField>
 
-          <Button type="submit" isPending={isLoading} className="w-full">
+          <Button type="submit" color="primary" isPending={isLoading} className="w-full mt-4 font-semibold shadow-lg hover:scale-[1.02] transition-transform duration-200 cursor-pointer">
             {({ isPending }) => (
               <>
                 {isPending && <Spinner color="current" size="sm" />}

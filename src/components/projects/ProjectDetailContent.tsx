@@ -39,20 +39,39 @@ export function ProjectDetailContent() {
 	const download = async () => {
 		if (!imageWithoutBgUrl) return;
 		const fileUrl = imageWithoutBgUrl;
-		const fileName = `no-bg-${name}`;
+		const fileName = `no-bg-${name}.png`; // Assuming PNG for background-removed images
 
-		const response = await fetch(fileUrl);
-		const blob = await response.blob();
-		const url = window.URL.createObjectURL(blob);
+		try {
+			const response = await fetch(fileUrl);
+			const blob = await response.blob();
 
-		const link = document.createElement("a");
-		link.href = url;
-		link.download = fileName;
-		link.style.display = "none";
-		document.body.appendChild(link);
-		link.click();
-		link.remove();
-		window.URL.revokeObjectURL(url);
+			// Fallback to Web Share API for mobile devices (iOS/Android)
+			if (navigator.share) {
+				const file = new File([blob], fileName, { type: blob.type });
+				if (navigator.canShare && navigator.canShare({ files: [file] })) {
+					await navigator.share({
+						files: [file],
+						title: fileName,
+					});
+					return;
+				}
+			}
+
+			// Desktop / fallback approach
+			const url = window.URL.createObjectURL(blob);
+			const link = document.createElement("a");
+			link.href = url;
+			link.download = fileName;
+			link.style.display = "none";
+			document.body.appendChild(link);
+			link.click();
+			link.remove();
+			window.URL.revokeObjectURL(url);
+		} catch (error) {
+			console.error("Error downloading image:", error);
+			// Ultimate fallback: open in new tab
+			window.open(fileUrl, "_blank");
+		}
 	};
 
 	return (

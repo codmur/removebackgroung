@@ -49,7 +49,7 @@ export const Route = createRootRouteWithContext<{
       {
         rel: "icon",
         type: "image/webp",
-        href: "/favicon.webp",
+        href: "/logo.webp",
       },
     ],
   }),
@@ -70,12 +70,7 @@ function PublicHeader() {
               <img
                 src="/logo.webp"
                 alt="BGR Logo"
-                className="block dark:hidden h-8 w-auto rounded-lg shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shrink-0"
-              />
-              <img
-                src="/logo-black.jpg"
-                alt="BGR Logo"
-                className="hidden dark:block h-8 w-auto rounded-lg shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shrink-0"
+                className="h-8 w-auto rounded-lg shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shrink-0"
               />
               <span className="bg-gradient-to-r from-foreground to-accent bg-clip-text text-transparent font-extrabold tracking-tight text-lg">
                 BgRemover

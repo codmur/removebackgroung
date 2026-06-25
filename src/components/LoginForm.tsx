@@ -69,13 +69,13 @@ export function LoginForm({ switchToSignUp }: LoginFormProps) {
   if (isForgotPassword) {
     if (resetSent) {
       return (
-        <Card className="w-full">
-          <Card.Header>
-            <Card.Title>{m.auth_checkEmailTitle()}</Card.Title>
-            <Card.Description>{m.auth_checkEmailDesc()}</Card.Description>
+        <Card className="w-full shadow-xl border-none bg-background/80 backdrop-blur-xl">
+          <Card.Header className="pt-6 pb-2 sm:pt-8 sm:pb-4 text-center">
+            <Card.Title className="text-xl sm:text-2xl font-bold text-success">{m.auth_checkEmailTitle()}</Card.Title>
+            <Card.Description className="text-sm text-muted-foreground">{m.auth_checkEmailDesc()}</Card.Description>
           </Card.Header>
-          <Card.Content className="flex flex-col gap-4">
-            <Button variant="secondary" onClick={() => { setIsForgotPassword(false); setResetSent(false); }} className="w-full cursor-pointer">
+          <Card.Content className="flex flex-col gap-4 px-4 pb-6 sm:px-6 sm:pb-6">
+            <Button variant="bordered" onClick={() => { setIsForgotPassword(false); setResetSent(false); }} className="w-full cursor-pointer mt-4">
               {m.auth_backToLogin()}
             </Button>
           </Card.Content>
@@ -84,15 +84,15 @@ export function LoginForm({ switchToSignUp }: LoginFormProps) {
     }
     
     return (
-        <Card className="w-full">
-          <Card.Header>
-            <Card.Title>{m.auth_resetPassword()}</Card.Title>
-            <Card.Description>{m.auth_resetPasswordDescription()}</Card.Description>
+        <Card className="w-full shadow-xl border-none bg-background/80 backdrop-blur-xl">
+          <Card.Header className="pt-6 pb-2 sm:pt-8 sm:pb-4 text-center">
+            <Card.Title className="text-xl sm:text-2xl font-bold">{m.auth_resetPassword()}</Card.Title>
+            <Card.Description className="text-sm text-muted-foreground">{m.auth_resetPasswordDescription()}</Card.Description>
           </Card.Header>
-          <Card.Content>
+          <Card.Content className="px-4 pb-6 sm:px-6 sm:pb-6">
             <Form className="flex flex-col gap-4" onSubmit={handleResetPassword}>
               {errorMsg && (
-                <Alert status="danger">
+                <Alert status="danger" className="mb-2">
                   <Alert.Indicator />
                   <Alert.Content>
                     <Alert.Title>{errorMsg}</Alert.Title>
@@ -106,7 +106,7 @@ export function LoginForm({ switchToSignUp }: LoginFormProps) {
                 <FieldError />
               </TextField>
 
-              <Button type="submit" isPending={isLoading} className="w-full cursor-pointer">
+              <Button type="submit" color="primary" isPending={isLoading} className="w-full mt-4 font-semibold shadow-lg hover:scale-[1.02] transition-transform duration-200 cursor-pointer">
                 {({ isPending }) => (
                   <>
                     {isPending && <Spinner color="current" size="sm" />}
@@ -131,12 +131,12 @@ export function LoginForm({ switchToSignUp }: LoginFormProps) {
   }
 
   return (
-    <Card className="w-full">
-      <Card.Header>
-        <Card.Title>{m.auth_loginTitle()}</Card.Title>
-        <Card.Description>{m.auth_loginDescription()}</Card.Description>
+    <Card className="w-full shadow-xl border-none bg-background/80 backdrop-blur-xl">
+      <Card.Header className="pt-6 pb-2 sm:pt-8 sm:pb-4 text-center">
+        <Card.Title className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-accent bg-clip-text text-transparent">{m.auth_loginTitle()}</Card.Title>
+        <Card.Description className="text-sm text-muted-foreground">{m.auth_loginDescription()}</Card.Description>
       </Card.Header>
-      <Card.Content>
+      <Card.Content className="px-4 pb-6 sm:px-6 sm:pb-6">
         <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           {errorMsg && (
             <Alert status="danger">
@@ -168,7 +168,7 @@ export function LoginForm({ switchToSignUp }: LoginFormProps) {
             <FieldError />
           </TextField>
 
-          <Button type="submit" isPending={isLoading} className="w-full">
+          <Button type="submit" color="primary" isPending={isLoading} className="w-full mt-4 font-semibold shadow-lg hover:scale-[1.02] transition-transform duration-200 cursor-pointer">
             {({ isPending }) => (
               <>
                 {isPending && <Spinner color="current" size="sm" />}
