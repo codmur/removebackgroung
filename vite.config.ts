@@ -17,6 +17,7 @@ const config = defineConfig({
 				__dirname,
 				"./src/lib/heroui-pro-mock.tsx",
 			),
+			"@": path.resolve(__dirname, "./src"),
 		},
 	},
 	server: {
