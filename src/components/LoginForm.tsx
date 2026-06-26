@@ -52,10 +52,11 @@ export function LoginForm({ switchToSignUp }: LoginFormProps) {
     setIsLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
+      const originUrl = import.meta.env.VITE_PUBLIC_URL || window.location.origin;
       await sendPasswordResetEmailFn({
         data: {
           email: formData.get("email") as string,
-          redirectTo: `${window.location.origin}/update-password`,
+          redirectTo: `${originUrl}/update-password`,
         },
       });
       setResetSent(true);
